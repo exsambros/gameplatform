@@ -5,13 +5,12 @@ export default class platformScene extends Scene {
 		super('platform-scene');
 	}
 	init () {
+	 //add player key platform
 	 this.platforms = [];
 	 this.player = undefined;
 	 this.key = undefined
 	 this.cursor = undefined
-	 this.scoreText = undefined;
-     this.score = 0;
-	 this.cursor = undefined
+
 	}
 
 	preload() {
@@ -19,36 +18,26 @@ export default class platformScene extends Scene {
 		this.load.image("key" ,"images/Key 4 - SILVER - 0000.png")
 		this.load.image("ground", "images/Grass.png");
 		this.load.image("background" ,"images/1.png");
-		//load spritesheed
-		//idle
-		this.load.spritesheet('run', 'images/DinoSprites - vita.png',{
-			frameWidth: 200,
-			frameHeight: 200
-		});
-		//run
-		this.load.spritesheet('idle', 'images/DinoSprites - vita.png',{
-			frameWidth: 200,
-			frameHeight: 200
-		});
-		this.load.spritesheet('jump', 'images/DinoSprites - vita.png',{
-			frameWidth: 200,
-			frameHeight: 200
-		});
-
-		//jump
-		this.load.spritesheet('fall', 'images/DinoSprites - vita.png',{
-			frameWidth: 200,
-			frameHeight: 200
-		});
-		//fall
+		this.load.image("platform" ,"images/platfrom.png");
+		//add spriteseed
+		this.load.spritesheet('dude', 'images/adventurer-Sheet.png', {
+			frameWidth: 31,
+			frameHeight: 31
+		 });
 		
+		
+	
 
-		}
+
+		
+	}
 
 	create() {
+		
 		//bacground/gambar
 		this.add.image(958,542 ,"background").setScale(4);
 		this.platforms=this.physics.add.staticGroup();
+		
 		//add platform
 		this.platforms.create(65, 1015, "ground")
 		this.platforms.create(194, 1015, "ground")
@@ -65,49 +54,88 @@ export default class platformScene extends Scene {
 		this.platforms.create(1608, 1015, "ground")
 		this.platforms.create(1737, 1015, "ground")
 		this.platforms.create(1865, 1015, "ground")
+		this.platforms.create(1865, 790, "platform")
+		this.platforms.create(1275, 620, "platform")
+		this.platforms.create(235, 670, "platform")
+		this.platforms.create(778, 430, "platform")
 		
 		
-		
-
-		//add player
-		this.player = this.physics.add.sprite(100, 900, "run").setScale(3);
-		this.player = this.physics.add.sprite(100, 900, "run").setScale(3);
-		this.player = this.physics.add.sprite(100, 900, "run").setScale(3);
-		this.player.setCollideWorldBounds(true);
-		this.physics.add.collider(this.player, this.platforms);
-
-
 		//add key
 		this.key = this.physics.add.group({
 			key: "key",
-			repeat: 4,
-			setXY: { x: 40, y: 0, stepX: 800 },
-	   });
-
-		//tidk tembus
-	   this.physics.add.collider(this.key, this.platforms);
-	   //pantul
-	   this.stars.children.iterate(function (child) {
-		child.setBounceY(0.5);
-	  });
-
-		//add cursor
-		this.cursor = this.input.keyboard.createCursorKeys();
-
-		//add anims
-
-		//animasi ke kiri
-		this.anims.create({
-			key: "left", 
-			frames: this.anims.generateFrameNumbers("dude", { start: 0, end: 5 }), 
-			frameRate: 10, 
-			repeat: -1, 
+			repeat: 3,
+			setXY: { x: 50, y: 0, stepX: 600 },
+		});
+		this.physics.add.collider(this.key, this.platforms);
+		this.key.children.iterate(function (child) {
+			
+			child.setBounceY(0.2);
 		  });
-		
+
+	  //add dude
+	  this.player = this.physics.add.sprite(100, 750, "dude");
+	  this.player.setCollideWorldBounds(true);
+	  this.physics.add.collider(this.player, this.platforms);
+	  //add cursor
+	  this.cursor = this.input.keyboard.createCursorKeys();
+	  //add anims kiri,idle,dan kanan
+
+	  this.anims.create({
+		key: "left", 
+		frames: this.anims.generateFrameNumbers("dude", { start: 8, end: 12 }), 
+		frameRate: 10, 
+		repeat: -1, 
+	  });
+       this.anims.create({
+	    key: "turn",
+		frames: this.anims.generateFrameNumbers("dude", { start: 0, end: 3 }), 
+		frameRate: 10, 
+		repeat: -1, 
+	     
+      });    
+        this.anims.create({
+	    key: "right",
+	    frames: this.anims.generateFrameNumbers("dude", { start: 8, end: 12 }),
+	    frameRate: 10,
+	    repeat: -1,
+    
+	    });
+
+		this.physics.add.overlap(this.player, this.key, this.platformScene, null, this);
+
+
 	}
 
+
+
+
+	update(){
+	 if (this.cursor.left.isDown) { 
 	
+	  this.player.setVelocity(-200, 200);
+	  this.player.anims.play("left", true);
+	 } else if (this.cursor.right.isDown) {
+	  this.player.setVelocity(200, 200);
+	  this.player.anims.play("right", true);
+	 } else {
+	  this.player.setVelocity(0, 0);
+	  this.player.anims.play("turn");
+		}
+
+		//agar melompat
+	 if (this.cursor.up.isDown) {
+		this.player.setVelocity(0, -200);  
+		this.player.anims.play("turn");
+		}
+
+	}
+
+	platformScene(player, key) {
+		key.destroy()
+	}
 	
-	  
-	  
-}
+		
+		
+		
+
+}	
