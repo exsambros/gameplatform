@@ -1,5 +1,10 @@
 import { AUTO, Scale, Game } from 'phaser'
-import platformScene from './scenes/platformScene'
+
+import MainMenuScene from './scenes/MainMenuScene'
+import Lv1Scene from './scenes/lv1Scene'
+import Lose1Scene from './scenes/Lose1Scene'
+
+
 
 const config = {
 	type: AUTO,
@@ -17,7 +22,7 @@ const config = {
 			debug: false,
 		},
 	},
-	scene: [platformScene],
+	scene: [MainMenuScene,Lv1Scene,Lose1Scene]
 }
 
 /* eslint-disable-next-line */

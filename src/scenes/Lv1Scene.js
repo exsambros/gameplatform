@@ -1,8 +1,8 @@
 import { Scene } from 'phaser'
 
-export default class platformScene extends Scene {
+export default class Lv1Scene extends Scene {
 	constructor() {
-		super('platform-scene');
+		super('Lv1-scene');
 	}
 	init () {
 	 //add player key platform
@@ -10,19 +10,23 @@ export default class platformScene extends Scene {
 	 this.player = undefined;
 	 this.key = undefined
 	 this.cursor = undefined
+	 //add score
+	 this.scoreText = undefined;
+     this.score = 0;
+	
 
 	}
 
 	preload() {
 		//bacgroundgambar/key/ground
 		this.load.image("key" ,"images/Key 4 - SILVER - 0000.png")
-		this.load.image("ground", "images/Grass.png");
+		this.load.image("ground", "images/graslv1.png");
 		this.load.image("background" ,"images/1.png");
 		this.load.image("platform" ,"images/platfrom.png");
 		//add spriteseed
 		this.load.spritesheet('dude', 'images/adventurer-Sheet.png', {
-			frameWidth: 31,
-			frameHeight: 31
+			frameWidth: 50,
+			frameHeight: 37
 		 });
 		
 		
@@ -40,20 +44,20 @@ export default class platformScene extends Scene {
 		
 		//add platform
 		this.platforms.create(65, 1015, "ground")
-		this.platforms.create(194, 1015, "ground")
-		this.platforms.create(323, 1015, "ground")
-		this.platforms.create(450, 1015, "ground")
+		this.platforms.create(193, 1015, "ground")
+		this.platforms.create(322, 1015, "ground")
+		this.platforms.create(455, 1015, "ground")
 		this.platforms.create(578, 1015, "ground")
-		this.platforms.create(707, 1015, "ground")
-		this.platforms.create(836, 1015, "ground")
-		this.platforms.create(964, 1015, "ground")
-		this.platforms.create(1093, 1015, "ground")
-		this.platforms.create(1222, 1015, "ground")
-		this.platforms.create(1351, 1015, "ground")
-		this.platforms.create(1479, 1015, "ground")
-		this.platforms.create(1608, 1015, "ground")
-		this.platforms.create(1737, 1015, "ground")
-		this.platforms.create(1865, 1015, "ground")
+		this.platforms.create(706, 1015, "ground")
+		this.platforms.create(834, 1015, "ground")
+		this.platforms.create(962, 1015, "ground")
+		this.platforms.create(1090, 1015, "ground")
+		this.platforms.create(1218, 1015, "ground")
+		this.platforms.create(1346, 1015, "ground")
+		this.platforms.create(1474, 1015, "ground")
+		this.platforms.create(1602, 1015, "ground")
+		this.platforms.create(1730, 1015, "ground")
+		this.platforms.create(1858, 1015, "ground")
 		this.platforms.create(1865, 790, "platform")
 		this.platforms.create(1275, 620, "platform")
 		this.platforms.create(235, 670, "platform")
@@ -73,7 +77,7 @@ export default class platformScene extends Scene {
 		  });
 
 	  //add dude
-	  this.player = this.physics.add.sprite(100, 750, "dude");
+	  this.player = this.physics.add.sprite(100, 750, "dude").setScale(2)
 	  this.player.setCollideWorldBounds(true);
 	  this.physics.add.collider(this.player, this.platforms);
 	  //add cursor
@@ -103,7 +107,16 @@ export default class platformScene extends Scene {
 
 		this.physics.add.overlap(this.player, this.key, this.platformScene, null, this);
 
+		// add score
+		this.scoreText = this.add.text(16, 16, "Score : 0", {
+			fontSize: "54px",
+			fill: "white",
+		});
 
+
+
+
+		
 	}
 
 
@@ -114,9 +127,11 @@ export default class platformScene extends Scene {
 	
 	  this.player.setVelocity(-200, 200);
 	  this.player.anims.play("left", true);
+	  this.player.setFlipX(true)
 	 } else if (this.cursor.right.isDown) {
 	  this.player.setVelocity(200, 200);
 	  this.player.anims.play("right", true);
+	  this.player.setFlipX(false)
 	 } else {
 	  this.player.setVelocity(0, 0);
 	  this.player.anims.play("turn");
@@ -127,15 +142,34 @@ export default class platformScene extends Scene {
 		this.player.setVelocity(0, -200);  
 		this.player.anims.play("turn");
 		}
+	 if (this.cursor.up.isUp) {
+		this.player.setVelocityY(200)
+	 }
+	 //add kunci di ambil semua dan pindah scene
+	 if (this.score >= 4) {
+		this.scene.start("");
+	 
+	  }
+	  
+	  
 
 	}
 
 	platformScene(player, key) {
 		key.destroy()
+		this.score += 1; 
+        this.scoreText.setText('Score : '+this.score);
 	}
 	
-		
-		
-		
+
+
+	
+  
+
+
+
+
+
+
 
 }	
