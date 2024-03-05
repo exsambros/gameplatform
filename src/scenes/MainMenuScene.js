@@ -9,11 +9,18 @@ export default class MainMenuScene extends Scene {
     this.startButton= undefined;
     this.player = undefined;
     this.key = undefined
+	this.bomb = undefined
+	this.bomb2 = undefined
+	this.bomb3 = undefined
+	
 
   }
   preload() {
-    //load backgraound
+    //load backgraound/key/bomb
     this.load.image("key" ,"images/Key 4 - SILVER - 0000.png")
+	this.load.image("bomb" ,"images/icons-and-abulites-stuff_0001s_0002_Calque-5.png")
+	this.load.image("bomb2" ,"images/icons-and-abulites-stuff_0001s_0000_Calque-12.png")
+	this.load.image("bomb3" ,"images/icons-and-abulites-stuff_0001s_0001_Calque-7.png")
     this.load.image("ground", "images/graslv1.png");
     this.load.image("ground2", "images/Graslv2.png");
     this.load.image("ground3", "images/Graslv3.png");
@@ -22,6 +29,7 @@ export default class MainMenuScene extends Scene {
     this.load.image("tree" , "images/48x48 trees.png");
     this.load.image("miringkiri" , "images/miringkiri.png");
     this.load.image("miringkanan" , "images/miringkanan.png");
+    this.load.image("gambar" , "images/are_you_ready.png");
 
     //add spriteseed
 		this.load.spritesheet('dude', 'images/adventurer-Sheet.png', {
@@ -31,17 +39,19 @@ export default class MainMenuScene extends Scene {
     
   }
   create() {
+	
 
     this.add.image(958,540 ,'backgroundstart')
     this.add.image(558,854 ,'tree').setScale(4)
     this.add.image(1350,854 ,'tree').setScale(4)
+	this.add.image(970 ,230, 'gambar').setScale(1.5)
     this.platforms=this.physics.add.staticGroup();
     //add dude
-	  this.player = this.physics.add.sprite(940, 0, "dude").setScale(4)
+	  this.player = this.physics.add.sprite(940, 250, "dude").setScale(4)
 	  this.player.setCollideWorldBounds(true);
 	  this.physics.add.collider(this.player, this.platforms);
 
-    this.platforms.create(64, 1015, "ground")
+        this.platforms.create(64, 1015, "ground")
 		this.platforms.create(192, 1015, "ground")
 		this.platforms.create(320, 1015, "ground")
 		this.platforms.create(448, 1015, "ground")
@@ -70,6 +80,7 @@ export default class MainMenuScene extends Scene {
 		this.platforms.create(64, 891, "miringkanan").setScale(0.5)
 		this.platforms.create(1856, 891, "miringkiri").setScale(0.5)
 		
+		
     
 
      this.startButton = this.add.image(942, 810, "startButton").setInteractive().setScale(0.5);
@@ -81,101 +92,42 @@ export default class MainMenuScene extends Scene {
       this
     );
 
-    //add key
+   //add key
 		this.key = this.physics.add.group({
 			key: "key",
 			repeat: 4,
-			setXY: { x: 50, y: 0, stepX: 596 },
+			setXY: { x: 50, y: 230, stepX: 596 },
 		});
 		this.physics.add.collider(this.key, this.platforms);
 		this.key.children.iterate(function (child) {
 			
 			child.setBounceY(0.5);
 		  });
-    
-  
-  }
 
 
-  
+	
+		  //add bomb
+		  this.bomb = this.physics.add.group({
+			key: "bomb",
+			repeat: 4,
+			setXY: { x: 360, y: 250, stepX:400 },
+		  });
+		  this.physics.add.collider(this.bomb, this.platforms);
+		  this.bomb.children.iterate(function ( child) {
+			child.setBounceY(0.5)
+		  })
+
+
+
+		  
 
 
 
 
+		 
+		 
+	}
+
+	
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import Phaser from "phaser";
-// export default class startgameScene extends Phaser.Scene {
-//   constructor() {
-//     super("startgame-scene");
-//   }
-//   init(){
-//     this.startButton = undefined;
-//   }
-//   preload() {
-//     //load backgraound
-//     this.load.image("backgroundstart" ,"images/1start.png");
-//   }
-//   create() {
-//     this.add.image(958,542 ,'bacgroundstart')
-
-//     
-
-// }
