@@ -1,8 +1,8 @@
 import { Scene } from "phaser";
 
-export default class Lv1Scene extends Scene {
+export default class Lv2Scene extends Scene {
   constructor() {
-    super("Lv1-scene");
+    super("Lv2-scene");
   }
   init() {
     //add player key platform
@@ -15,19 +15,19 @@ export default class Lv1Scene extends Scene {
     //add score
     this.scoreText = undefined;
     this.score = 0;
-    // this.timer = undefined
+   
     
     
   }
 
   preload() {
     //bacgroundgambar/key/ground
-    this.load.image("key", "images/Key 4 - SILVER - 0000.png");
-    this.load.image("bomb", "images/icons-and-abulites-stuff_0001s_0002_Calque-5.png");
-    this.load.image("ground", "images/graslv1.png");
-    this.load.image("background", "images/1.png");
+    this.load.image("key3", "images/Key 5 - GOLD - frame0012.png");
+    this.load.image("bomb3", "images/icons-and-abulites-stuff_0001s_0000_Calque-12.png");
+    this.load.image("ground2", "images/graslv2.png");
+    this.load.image("background2", "images/1lv2.png");
     this.load.image("platform", "images/platfrom.png");
-    this.load.image("score", "images/1-3.png");
+    this.load.image("score3", "images/2-3.png");
 
     //add spriteseed
     this.load.spritesheet("dude", "images/adventurer-Sheet.png", {
@@ -38,51 +38,66 @@ export default class Lv1Scene extends Scene {
 
   create() {
     //bacground/gambar
-    this.add.image(958, 542, "background").setScale(4);
-    this.add.image(130, 120, "score").setScale(3);
+    this.add.image(958, 542, "background2").setScale(4);
+    this.add.image(130, 120, "score3").setScale(3);
     this.platforms = this.physics.add.staticGroup();
 
     //add platform
-    this.platforms.create(65, 1015, "ground");
-    this.platforms.create(193, 1015, "ground");
-    this.platforms.create(321, 1015, "ground");
-    this.platforms.create(449, 1015, "ground");
-    this.platforms.create(577, 1015, "ground");
-    this.platforms.create(705, 1015, "ground");
-    this.platforms.create(833, 1015, "ground");
-    this.platforms.create(961, 1015, "ground");
-    this.platforms.create(1089, 1015, "ground");
-    this.platforms.create(1217, 1015, "ground");
-    this.platforms.create(1345, 1015, "ground");
-    this.platforms.create(1473, 1015, "ground");
-    this.platforms.create(1601, 1015, "ground");
-    this.platforms.create(1729, 1015, "ground");
-    this.platforms.create(1857, 1015, "ground");
+    this.platforms.create(65, 1015, "ground2");
+    this.platforms.create(193, 1015, "ground2");
+    this.platforms.create(321, 1015, "ground2");
+    this.platforms.create(449, 1015, "ground2");
+    this.platforms.create(577, 1015, "ground2");
+    this.platforms.create(705, 1015, "ground2");
+    this.platforms.create(833, 1015, "ground2");
+    this.platforms.create(961, 1015, "ground2");
+    this.platforms.create(1089, 1015, "ground2");
+    this.platforms.create(1217, 1015, "ground2");
+    this.platforms.create(1345, 1015, "ground2");
+    this.platforms.create(1473, 1015, "ground2");
+    this.platforms.create(1601, 1015, "ground2");
+    this.platforms.create(1729, 1015, "ground2");
+    this.platforms.create(1857, 1015, "ground2");
+    this.platforms.create(65, 1, "ground");
+    this.platforms.create(193, 1, "ground");
+    this.platforms.create(321, 1, "ground");
+    this.platforms.create(449, 1, "ground");
+    this.platforms.create(577, 1, "ground");
+    this.platforms.create(705, 1, "ground");
+    this.platforms.create(833, 1, "ground");
+    this.platforms.create(961, 1, "ground");
+    this.platforms.create(1089, 1, "ground");
+    this.platforms.create(1217, 1, "ground");
+    this.platforms.create(1345, 1, "ground");
+    this.platforms.create(1473, 1, "ground");
+    this.platforms.create(1601, 1, "ground");
+    this.platforms.create(1729, 1, "ground");
+    this.platforms.create(1857, 1, "ground");
     this.platforms.create(1865, 790, "platform");
     this.platforms.create(1275, 620, "platform");
     this.platforms.create(235, 670, "platform");
     this.platforms.create(778, 430, "platform");
 
     //add key
-    this.key = this.physics.add.group({
-      key: "key",
-      repeat: 3,
-      setXY: { x: 80, y: 0, stepX: 600 },
+    this.key3 = this.physics.add.group({
+      key: "key3",
+      repeat: 4,
+      setXY: { x: 60, y: 100, stepX: 430 },
     });
-    this.physics.add.collider(this.key, this.platforms);
-    this.key.children.iterate(function (child) {
+    this.physics.add.collider(this.key3, this.platforms);
+    this.key3.children.iterate(function (child) {
       child.setBounceY(0.2);
     });
 
     //add bomb
-    this.bomb = this.physics.add.group({
-      key: "bomb",
-      repeat: 4,
-      setXY: { x: 290, y: 400, stepX:300 },
+    this.bomb3 = this.physics.add.group({
+      key: "bomb3",
+      repeat: 7,
+      setXY: { x: 210, y: 100, stepX:250 },
     });
-    this.physics.add.collider(this.bomb, this.platforms);
-    this.bomb.children.iterate(function ( child) {
-      child.setBounceY(0.2)
+    this.physics.add.collider(this.bomb3, this.platforms);
+    this.bomb3.children.iterate(function ( child) {
+      child.setBounceY(1)
     })
 
     //add dude
@@ -114,14 +129,14 @@ export default class Lv1Scene extends Scene {
 
     this.physics.add.overlap(
       this.player,
-      this.key,
+      this.key3,
       this.keyScene,
       null,
       this
     );
     this.physics.add.overlap(
       this.player,
-      this.bomb,
+      this.bomb3,
       this.bombScene,
       null,
       this
@@ -159,7 +174,7 @@ export default class Lv1Scene extends Scene {
       this.endJump();
     }
     //add kunci di ambil semua dan pindah scene
-    if (this.score >= 4) {
+    if (this.score >= 5) {
       this.scene.start("win1-Scene");
     }
   }
@@ -171,7 +186,7 @@ export default class Lv1Scene extends Scene {
   }
   bombScene(bomb,playerdie) {
     playerdie.destroy();
-    this.scene.start("Lose1-Scene")
+    this.scene.start("Lose2-Scene")
   }
 
   startJump() {

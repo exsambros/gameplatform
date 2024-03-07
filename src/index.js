@@ -4,6 +4,9 @@ import MainMenuScene from './scenes/MainMenuScene'
 import Lv1Scene from './scenes/Lv1Scene'
 import Lose1Scene from './scenes/Lose1Scene'
 import win1Scene from './scenes/win1Scene'
+import Lv2Scene from './scenes/LV2Scene'
+import win2Scene from './scenes/Win2Scene'
+import Lose2Scene from './scenes/Lose2'
 
 
 
@@ -23,7 +26,9 @@ const config = {
 			debug: false,
 		},
 	},
-	scene: [MainMenuScene,Lv1Scene,win1Scene,Lose1Scene]
+	scene: [MainMenuScene,Lv1Scene,win1Scene,Lose1Scene,Lv2Scene,win2Scene,Lose2Scene]
+	//scene: [win2Scene]
+	
 }
 
 /* eslint-disable-next-line */
