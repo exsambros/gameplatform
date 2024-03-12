@@ -82,7 +82,7 @@ export default class win2Scene extends Scene {
             this.startButton.once(
              "pointerup",
              () => {
-               this.scene.start("Lose2-Scene")
+               this.scene.start("Lv3-scene")
              })
              this.homeButton=this.add.image(742, 810, "homeButton").setInteractive().setScale(1);
              this.homeButton.once(

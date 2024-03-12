@@ -77,12 +77,13 @@ export default class Lv2Scene extends Scene {
     this.platforms.create(1275, 620, "platform");
     this.platforms.create(235, 670, "platform");
     this.platforms.create(778, 430, "platform");
+    this.platforms.create(1478, 330, "platform");
 
     //add key
     this.key3 = this.physics.add.group({
       key: "key3",
-      repeat: 4,
-      setXY: { x: 60, y: 100, stepX: 430 },
+      repeat: 5,
+      setXY: { x: 60, y: 100, stepX: 370 },
     });
     this.physics.add.collider(this.key3, this.platforms);
     this.key3.children.iterate(function (child) {
@@ -92,7 +93,7 @@ export default class Lv2Scene extends Scene {
     //add bomb
     this.bomb3 = this.physics.add.group({
       key: "bomb3",
-      repeat: 7,
+      repeat: 6,
       setXY: { x: 210, y: 100, stepX:250 },
     });
     this.physics.add.collider(this.bomb3, this.platforms);
@@ -174,8 +175,8 @@ export default class Lv2Scene extends Scene {
       this.endJump();
     }
     //add kunci di ambil semua dan pindah scene
-    if (this.score >= 5) {
-      this.scene.start("win1-Scene");
+    if (this.score >= 6) {
+      this.scene.start("win2-Scene");
     }
   }
 
@@ -196,7 +197,7 @@ export default class Lv2Scene extends Scene {
       callbackScope: this,
       loop: true,
     });
-    this.player.setVelocityY(-200);
+    this.player.setVelocityY(this.power *-100);
   }
   endJump() {
     this.time.removeEvent(this.timer);
