@@ -1,6 +1,6 @@
 import { Scene } from 'phaser'
 
-export default class win1Scene extends Scene {
+export default class Win1Scene extends Scene {
 	constructor() {
 		super('win1-Scene');
 	}

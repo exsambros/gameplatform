@@ -1,8 +1,8 @@
 import { Scene } from 'phaser'
 
-export default class win2Scene extends Scene {
+export default class Win3Scene extends Scene {
 	constructor() {
-		super('win2-Scene');
+		super('Win3-Scene');
 	}
 
     init() {
@@ -15,18 +15,19 @@ export default class win2Scene extends Scene {
       }
       preload() {
         //load backgraound/key/bomb
-        this.load.image("key4" ,"images/Key 15 - BRONZE - frame0047.png")
-        this.load.image("bomb4" ,"images/bomblv3.png")
+        this.load.image("key2" ,"images/Key 5 - GOLD - frame0012.png")
+        this.load.image("bomb2" ,"images/icons-and-abulites-stuff_0001s_0000_Calque-12.png")
         this.load.image("ground", "images/graslv1.png");
         this.load.image("ground2", "images/Graslv2.png");
         this.load.image("ground3", "images/Graslv3.png");
         this.load.image("backgroundstart" ,"images/backgroun1new.png");
-        this.load.image("startButton" , "images/play.png");
+        this.load.image("tryButton" , "images/try.png");
         this.load.image("homeButton" , "images/home.png");
         this.load.image("tree" , "images/48x48 trees.png");
         this.load.image("miringkiri" , "images/miringkiri.png");
         this.load.image("miringkanan" , "images/miringkanan.png");
         this.load.image("youwin" , "images/you_win.png");
+        this.load.image("congres" , "images/congres.png");
     
         //add spriteseed
             this.load.spritesheet('dude', 'images/adventurer-Sheet.png', {
@@ -41,6 +42,7 @@ export default class win2Scene extends Scene {
         this.add.image(558,854 ,'tree').setScale(4)
         this.add.image(1350,854 ,'tree').setScale(4)
         this.add.image(940 ,230, 'youwin')
+        this.add.image(910 ,130, 'congres')
         this.platforms=this.physics.add.staticGroup();
         //add dude
           this.player = this.physics.add.sprite(940, 420, "dude").setScale(4)
@@ -67,18 +69,18 @@ export default class win2Scene extends Scene {
             this.platforms.create(943, 615, "ground3")
             this.platforms.create(1071, 615, "ground3")
             this.platforms.create(1199, 615, "ground3")
-            this.platforms.create(1599, 615, "ground2")
-            this.platforms.create(1699, 615, "ground2")
-            this.platforms.create(1799, 615, "ground2")
-            this.platforms.create(100, 615, "ground")
-            this.platforms.create(200, 615, "ground")
-            this.platforms.create(300, 615, "ground")
+            this.platforms.create(1599, 615, "ground")
+            this.platforms.create(1699, 615, "ground")
+            this.platforms.create(1799, 615, "ground")
+            this.platforms.create(100, 615, "ground2")
+            this.platforms.create(200, 615, "ground2")
+            this.platforms.create(300, 615, "ground2")
             this.platforms.create(64, 891, "miringkanan").setScale(0.5)
             this.platforms.create(1856, 891, "miringkiri").setScale(0.5)
             
         
     
-            this.startButton = this.add.image(1142, 810, "startButton").setInteractive().setScale(0.5);
+            this.startButton = this.add.image(1142, 810, "tryButton").setInteractive().setScale(0.5);
             this.startButton.once(
              "pointerup",
              () => {
@@ -96,7 +98,7 @@ export default class win2Scene extends Scene {
     
        //add key
             this.key = this.physics.add.group({
-                key: "key4",
+                key: "key2",
                 repeat: 4,
                 setXY: { x: 50, y: 230, stepX: 596 },
             });
@@ -108,7 +110,7 @@ export default class win2Scene extends Scene {
 
                //add bomb
 		  this.bomb = this.physics.add.group({
-			key: "bomb4",
+			key: "bomb2",
 			repeat: 4,
 			setXY: { x: 360, y: 250, stepX:400 },
 		  });

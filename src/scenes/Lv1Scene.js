@@ -15,7 +15,8 @@ export default class Lv1Scene extends Scene {
     //add score
     this.scoreText = undefined;
     this.score = 0;
-    // this.timer = undefined
+    
+   
     
     
   }
@@ -34,6 +35,9 @@ export default class Lv1Scene extends Scene {
       frameWidth: 50,
       frameHeight: 37,
     });
+
+
+    this.load.audio
   }
 
   create() {
@@ -132,7 +136,7 @@ export default class Lv1Scene extends Scene {
       fontSize: "54px",
       fill: "white",
     });
-
+   // this.platforms.setCollisionByExclusion(-1,true)
     
   }
 
@@ -181,7 +185,7 @@ export default class Lv1Scene extends Scene {
       callbackScope: this,
       loop: true,
     });
-    this.player.setVelocityY(this.power *-100);
+    this.player.setVelocityY(this.power*-200);
   }
   endJump() {
     this.time.removeEvent(this.timer);
@@ -190,7 +194,7 @@ export default class Lv1Scene extends Scene {
   }
 
   tick() {
-    if (this.power < 5) {
+    if (this.power < 3) {
       this.power += 1;
       console.log(this.power);
     }
